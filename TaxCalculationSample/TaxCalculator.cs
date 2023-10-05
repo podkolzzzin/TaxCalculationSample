@@ -31,34 +31,25 @@ public class TaxCalculator
   //         - 54% for all incomes which are higher than 720k 
   public double CalculateTax(Citizen citizen)
   {
-    if (citizen.State == "Taxes")
-      return citizen.Income * 0.17;
-    else if (citizen.State == "California")
-      return citizen.Income * 0.32;
-    else if (citizen.State == "Alaska")
-      return citizen.Income * 0.15;
-    else if (citizen.State == "Arizona")
-      return citizen.Income < 30000 ? 0 : citizen.Income * 0.22;
-    else if (citizen.State == "Pennsylvania")
+    return citizen.State switch
     {
-      if (citizen.Age < 31)
-        return citizen.Income * 0.22 * 0.95;
-      else if (citizen.Age > 76 && citizen.Income < 40000)
-        return citizen.Income * 0.22 * 0.93;
-      else
-        return citizen.Income * 0.22;
-    }
-    else if (citizen.State == "Montana")
-    {
-      if (citizen.Income <= 100000)
-        return citizen.Income * 0.22;
-      else if (citizen.Income > 100000 && citizen.Income <= 230000)
-        return citizen.Income * 0.25;
-      else if (citizen.Income > 230000 && citizen.Income <= 720000)
-        return citizen.Income * 0.37;
-      else
-        return citizen.Income * 0.54;
-    }
-    return citizen.Income * 0.22;
+      "Taxes" => citizen.Income * 0.17,
+      "California" => citizen.Income * 0.32,
+      "Alaska" => citizen.Income * 0.15,
+      "Arizona" => citizen.Income < 30000 ? 0 : citizen.Income * 0.22,
+      "Pennsylvania" when citizen.Age < 31 => citizen.Income * 0.22 * 0.95,
+      "Pennsylvania" when citizen.Age > 76 && citizen.Income < 40000 => citizen.Income * 0.22 * 0.93,
+      "Pennsylvania" => citizen.Income * 0.22,
+      "Montana" => citizen.Income switch
+      {
+        <= 100000 => citizen.Income * 0.22,
+        > 100000 and <= 230000 => citizen.Income * 0.25,
+        > 230000 and <= 720000 => citizen.Income * 0.37,
+        _ => citizen.Income * 0.54
+      },
+      "Delaware" when citizen.Income < 60000 => citizen.Income * 0.22 * 0.9,
+      "Delaware" => citizen.Income * 0.22,
+      _ => citizen.Income * 0.22
+    };
   }
 }
