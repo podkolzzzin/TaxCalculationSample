@@ -48,7 +48,7 @@ public class TaxCalculatorTests
   [InlineData("Montana", 1000000, 540000)]
   [InlineData("Delaware", 100000, 22000)]
   [InlineData("Delaware", 50000, 9900)]
-  [InlineData("Maryland", 100_000, 40_001)]
+  [InlineData("Maryland", 100_000, 40_000)]
   public void When_TheStateAndIncomeSet_CalculateTax_Succeed(string state, int income, int expectedTax, int age = 0)
   {
     // Arrange
