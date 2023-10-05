@@ -12,6 +12,7 @@ namespace TaxCalculationSample.UnitTests;
     //         - 25% for all incomes which are higher than 100k and less than 230k
     //         - 37% for all incomes which are higher than 230k and less than 720k
     //         - 54% for all incomes which are higher than 720k 
+    //    - In Delaware there is a tax discount 10% for all incomes which are less than 60k
 
     // Test Cases:
     // Taxes, 100k, 17k
@@ -45,6 +46,8 @@ public class TaxCalculatorTests
   [InlineData("Montana", 200000, 50000)]
   [InlineData("Montana", 500000, 185000)]
   [InlineData("Montana", 1000000, 540000)]
+  [InlineData("Delaware", 100000, 22000)]
+  [InlineData("Delaware", 50000, 9900)]
   public void When_TheStateAndIncomeSet_CalculateTax_Succeed(string state, int income, int expectedTax, int age = 0)
   {
     // Arrange
