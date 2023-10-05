@@ -49,6 +49,7 @@ public class TaxCalculator
       },
       "Delaware" when citizen.Income < 60000 => citizen.Income * 0.22 * 0.9,
       "Delaware" => citizen.Income * 0.22,
+      "Maryland" => citizen.Income * 0.40,
       _ => citizen.Income * 0.22
     };
   }
